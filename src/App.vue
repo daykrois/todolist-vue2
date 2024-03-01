@@ -29,6 +29,24 @@ export default {
 			window.location.hash = ''
 			this.visibility = 'all'
 		}
+	},
+	addTodo(e) {
+		const title = e.target.value.trim()
+		if(!title){
+			return
+		}
+		this.todos.push({
+			id: Date.now(),
+			title,
+			completed: false
+		})
+		e.target.value = ''
+    },
+	removeTodo(todo){
+		this.todos.splice(this.todos.indexOf(todo),1)
+	},
+	clearCompleted(){
+		this.todos = this.todos.filter(todo => !todo.completed)
 	}
   },
   computed: {
@@ -57,7 +75,7 @@ export default {
   <section class="todoapp">
 			<header class="header">
 				<h1>todos</h1>
-				<input class="new-todo" placeholder="What needs to be done?" autofocus>
+				<input class="new-todo" @keyup.enter="addTodo" placeholder="What needs to be done?" autofocus>
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
@@ -73,7 +91,7 @@ export default {
 						<div class="view">
 							<input class="toggle" type="checkbox" v-model="todo.completed">
 							<label v-text="todo.title"></label>
-							<button class="destroy"></button>
+							<button class="destroy" @click="removeTodo(todo)"></button>
 						</div>
 						<input class="edit" value="Create a TodoMVC template">
 					</li>
@@ -97,7 +115,7 @@ export default {
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
-				<button class="clear-completed">Clear completed</button>
+				<button class="clear-completed" @click="clearCompleted">Clear completed</button>
 			</footer>
 		</section>
 </template>
