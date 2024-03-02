@@ -1,5 +1,4 @@
 <script>
-// import 'todomvc-app-css/index.css'
 export default {
   data () {
     return {
