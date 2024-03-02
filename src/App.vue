@@ -1,4 +1,5 @@
 <script>
+// import 'todomvc-app-css/index.css'
 export default {
   data () {
     return {
@@ -121,5 +122,5 @@ export default {
 </template>
 
 <style>
-  @import "../node_modules/todomvc-app-css/index.css"
+  @import 'todomvc-app-css/index.css'
 </style>
